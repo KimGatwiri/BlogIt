@@ -39,7 +39,7 @@ const Signup = () => {
         theme: "dark",
         duration: 3000,
       });
-      setTimeout(() => navigate("/login"), 3000);
+      setTimeout(() => navigate("/Login"));
     },
   });
 
