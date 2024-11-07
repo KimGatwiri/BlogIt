@@ -12,8 +12,8 @@ function Navigation() {
     navigate("/signup");
   };
 
-  const handleLoginClick = () => {
-    navigate("/login");
+  const handleLogOutClick = () => {
+    navigate("/");
   };
 
   const handleExploreClick = () => {
@@ -25,7 +25,9 @@ function Navigation() {
   const handleListingClick = () => {
     navigate("/BlogListPage");
   };
-
+const handleArticleClick =()=>{
+  navigate("/Article")
+}
   return (
     <>
       <div className="flex gap-96 ">
@@ -54,9 +56,9 @@ function Navigation() {
               Write
             </a>
             <a
-              href="#"
+              href="/Article"
               className="explore underline decoration-transparent hover:decoration-blue-500 hover:decoration-4"
-              onClick={handleExploreClick}
+              onClick={handleArticleClick}
             >
               Articles
             </a>
@@ -79,9 +81,9 @@ function Navigation() {
           <div className="flex gap-10 text-xl ">
             <button
               className="login bg-blue-400 text-gray-50 rounded p-2 "
-              onClick={handleLoginClick}
+              onClick={handleLogOutClick}
             >
-              Login
+              LogOut
             </button>
             <button
               className="signup bg-blue-800 text-gray-50 rounded p-2 "

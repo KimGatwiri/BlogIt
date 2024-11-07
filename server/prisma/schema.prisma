@@ -34,4 +34,5 @@ model post {
   updatedAt DateTime @updatedAt
   owner     String
   user      user     @relation(fields: [owner], references: [id])
+  @@map("posts")
 }

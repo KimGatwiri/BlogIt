@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Editor } from "primereact/editor";
 import "primereact/resources/themes/saga-blue/theme.css";
@@ -5,42 +6,63 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import { useMutation } from "react-query";
 import { API_BASE } from "../utils/apibase";
+import {useNavigate} from 'react-router-dom';
 
 function Writing() {
   const [title, setTitle] = useState("");
   const [excerpt, setExcerpt] = useState("");
   const [body, setBody] = useState("");
-  // const [featuredImage, setFeaturedImage] = useState(null);
+  const navigate =useNavigate();
 
   const { mutate, isLoading } = useMutation({
     mutationFn: async (formData) => {
       const response = await fetch(`${API_BASE}/writing`, {
         method: "POST",
         body: JSON.stringify(formData),
-        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", 
       });
+
+      // Log the response
       console.log(response);
+
+      if (!response.ok) {
+        const error = await response.json();
+        console.log("Error:", error.message);
+        throw new Error(error.message || "Something went wrong");
+      }
+      const data =await response.json();
+      return data;
+
+     
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
+      navigate(`/postDetails/${data.id}`)
+      toast ("post published successfully ✔",{
+        theme:"toast-success",
+        duration:2000,})
       console.log("Post created successfully!");
     },
-    onError: () => {
-      console.log("Error creating post.");
+
+    onError: (error) => {
+      toast (error.message,{
+        theme:"toast-error",
+        duration:2000,
+      });
     },
   });
-
-  // const handleImageUpload = (e) => {
-  //   setFeaturedImage(e.target.files[0]);
-  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("excerpt", excerpt);
-    formData.append("body", body);
-    // formData.append("featuredImage", featuredImage);
+    // Send data as a plain object, not FormData
+    const formData = {
+      title,
+      excerpt,
+      body,
+    };
 
     mutate(formData);
   };
@@ -51,15 +73,6 @@ function Writing() {
         Create New Blog
       </h1>
       <form onSubmit={handleSubmit}>
-        {/* <div className="mb-4">
-          <label>Featured Image (required)</label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageUpload}
-            required
-          />
-        </div> */}
         <div className="mb-4">
           <label>Title (required)</label>
           <textarea

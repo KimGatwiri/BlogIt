@@ -41,7 +41,7 @@ const Login = () => {
       const response = await mutateAsync({ emailAddress: email, password });
       if (response.ok) {
         toast("Login successful!");
-        navigate("/Home");
+        navigate("/BlogListPage");
       }
     } catch (error) {
       if (response.ok === false) {
