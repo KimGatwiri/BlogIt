@@ -25,9 +25,9 @@ function Navigation() {
   const handleListingClick = () => {
     navigate("/BlogListPage");
   };
-const handleArticleClick =()=>{
-  navigate("/Article")
-}
+  const handleArticleClick = () => {
+    navigate("/Article");
+  };
   return (
     <>
       <div className="flex gap-96 ">

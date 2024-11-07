@@ -36,7 +36,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import "./index.css";
 import Signup from "./pages/signup";
 import Login from "./pages/login";
-import Home from "./pages/Home/home";  // Import the Home component
+import Home from "./pages/Home/home"; // Import the Home component
 import Navigation from "./pages/navigation";
 import BlogListPage from "./pages/listing";
 import Writing from "./pages/writing";
@@ -57,7 +57,7 @@ function App() {
 
 // This component handles the conditional rendering of the Navigation bar
 function AppContent() {
-  const location = useLocation();  // Get the current location
+  const location = useLocation(); // Get the current location
 
   const excludeNavRoutes = ["/", "/signup", "/login"]; // Routes to exclude the navigation bar
 
@@ -74,13 +74,12 @@ function AppContent() {
         <Route path="/writing" element={<Writing />} />
         <Route path="/Article" element={<Article />} />
         <Route path="/postDetails/:id" element={<PostDetails />} />
-        
         {/* Default Route */}
-        <Route path="/" element={<Home />} /> {/* This will display the Home page on the root path */}
+        <Route path="/" element={<Home />} />{" "}
+        {/* This will display the Home page on the root path */}
       </Routes>
     </>
   );
 }
 
 export default App;
-

@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Editor } from "primereact/editor";
 import "primereact/resources/themes/saga-blue/theme.css";
@@ -6,13 +5,13 @@ import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 import { useMutation } from "react-query";
 import { API_BASE } from "../utils/apibase";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 function Writing() {
   const [title, setTitle] = useState("");
   const [excerpt, setExcerpt] = useState("");
   const [body, setBody] = useState("");
-  const navigate =useNavigate();
+  const navigate = useNavigate();
 
   const { mutate, isLoading } = useMutation({
     mutationFn: async (formData) => {
@@ -22,7 +21,7 @@ function Writing() {
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include", 
+        credentials: "include",
       });
 
       // Log the response
@@ -33,23 +32,22 @@ function Writing() {
         console.log("Error:", error.message);
         throw new Error(error.message || "Something went wrong");
       }
-      const data =await response.json();
+      const data = await response.json();
       return data;
-
-     
     },
     onSuccess: (data) => {
-      navigate(`/postDetails/${data.id}`)
-      toast ("post published successfully ✔",{
-        theme:"toast-success",
-        duration:2000,})
+      navigate(`/postDetails/${data.id}`);
+      toast("post published successfully ✔", {
+        theme: "toast-success",
+        duration: 2000,
+      });
       console.log("Post created successfully!");
     },
 
     onError: (error) => {
-      toast (error.message,{
-        theme:"toast-error",
-        duration:2000,
+      toast(error.message, {
+        theme: "toast-error",
+        duration: 2000,
       });
     },
   });

@@ -68,16 +68,22 @@ const Signup = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-lg">
-        <h2 className="text-3xl font-bold text-center text-gray-800">Welcome to BlogIt</h2>
+        <h2 className="text-3xl font-bold text-center text-gray-800">
+          Welcome to BlogIt
+        </h2>
         <p className="text-center text-lg text-gray-500">
           Create an account to start writing or explore inspiring stories.
         </p>
 
-        {formError && <p className="text-red-500 text-sm text-center">{formError}</p>}
+        {formError && (
+          <p className="text-red-500 text-sm text-center">{formError}</p>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-base font-medium text-gray-700">First Name</label>
+            <label className="block text-base font-medium text-gray-700">
+              First Name
+            </label>
             <input
               type="text"
               name="firstname"
@@ -88,7 +94,9 @@ const Signup = () => {
             />
           </div>
           <div>
-            <label className="block text-base font-medium text-gray-700">Last Name</label>
+            <label className="block text-base font-medium text-gray-700">
+              Last Name
+            </label>
             <input
               type="text"
               name="lastname"
@@ -99,7 +107,9 @@ const Signup = () => {
             />
           </div>
           <div>
-            <label className="block text-base font-medium text-gray-700">Email</label>
+            <label className="block text-base font-medium text-gray-700">
+              Email
+            </label>
             <input
               type="email"
               name="email"
@@ -110,7 +120,9 @@ const Signup = () => {
             />
           </div>
           <div>
-            <label className="block text-base font-medium text-gray-700">Password</label>
+            <label className="block text-base font-medium text-gray-700">
+              Password
+            </label>
             <input
               type="password"
               name="password"
@@ -121,7 +133,9 @@ const Signup = () => {
             />
           </div>
           <div>
-            <label className="block text-base font-medium text-gray-700">Confirm Password</label>
+            <label className="block text-base font-medium text-gray-700">
+              Confirm Password
+            </label>
             <input
               type="password"
               name="confirmpassword"

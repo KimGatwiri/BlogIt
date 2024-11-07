@@ -19,7 +19,7 @@ model user {
   lastName     String
   emailAddress String @unique
   password     String
-  note         post[]
+  posts     post[]
 
   @@map("users")
 }

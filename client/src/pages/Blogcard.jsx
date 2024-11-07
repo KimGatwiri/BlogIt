@@ -1,30 +1,45 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { FaUser } from "react-icons/fa";
 
-function BlogCard({ post }) {
+function BlogCard({
+  id,
+  title,
+  excerpt,
+  body,
+  authorName,
+  authorImgUrl,
+  updatedDate,
+}) {
+  const navigate = useNavigate();
+
+  if (!id) {
+    navigate(`/postDetails/${id}`);
+  }
   return (
     <div className="max-w-md p-4 bg-blue-200 shadow-md rounded-lg hover:shadow-lg transition">
-      <img
-        src={post.featuredImage}
-        alt={post.title}
-        className="w-full h-48 object-cover rounded-t-lg"
-      />
       <div className="p-4">
-        <h2 className="text-lg font-semibold mb-2">{post.title}</h2>
-        <p className="text-gray-600 text-sm">{post.excerpt}</p>
+        <h2 className="text-lg font-semibold mb-2">{title}</h2>
+        <p className="text-gray-600 text-sm">{excerpt}</p>
+
+        <div
+          className="prose lg:prose-xl text-gray-800 mb-8"
+          dangerouslySetInnerHTML={{ __html: body }}
+        />
         <div className="flex items-center mt-4">
-          <img
-            src={post.author.avatar || "/placeholder-avatar.png"}
-            alt={post.author.username}
-            className="w-8 h-8 rounded-full mr-2"
-          />
+          {authorImgUrl ? (
+            <img src={authorImgUrl} className="w-8 h-8 rounded-full mr-2" />
+          ) : (
+            <FaUser />
+          )}
           <div className="text-sm">
-            <p>{post.author.username}</p>
-            <p className="text-gray-700">{post.updatedDate}</p>
+            <p>{authorName}</p>
+            <p className="text-gray-700">{updatedDate}</p>
           </div>
         </div>
         <button
           className="mt-4 text-blue-500 hover:text-blue-700"
-          onClick={() => (window.location.href = "/write")}
+          onClick={() => navigate(`/postDetails/${id}`)}
         >
           Read More
         </button>
@@ -32,5 +47,4 @@ function BlogCard({ post }) {
     </div>
   );
 }
-
 export default BlogCard;

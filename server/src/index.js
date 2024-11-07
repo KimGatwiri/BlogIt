@@ -4,9 +4,10 @@ import cookieParser from "cookie-parser";
 import { registeruser } from "./controllers/users.js";
 import { loginuser } from "./controllers/auth.js";
 import validateUserDetails from "./middleware/validateuserdetails.js";
-import { createPost,fetchSinglePost } from "./controllers/posts.js";
+import { createPost, fetchSinglePost } from "./controllers/posts.js";
 import verifyToken from "./middleware/verifyToken.js";
 import validatePost from "./middleware/validatepost.js";
+import { fetchAllposts } from "./controllers/posts.js";
 const app = express();
 //register middlewares
 app.use(express.json());
@@ -23,7 +24,8 @@ app.use(cookieParser());
 app.post("/users", validateUserDetails, registeruser);
 app.post("/auth/login", loginuser);
 app.post("/writing", verifyToken, validatePost, createPost);
-app.get("/postDetails/:id",fetchSinglePost)
+app.get("/postDetails/:id", fetchSinglePost);
+app.get("/posts", fetchAllposts);
 //server
 app.listen(2000, () => {
   console.log(`server is running on port 2000...`);

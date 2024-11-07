@@ -12,7 +12,7 @@
 //     navigate("/login");
 //   };
 //   return (
-    
+
 //     <div
 //       className="relative m-2.5 bg-cover bg-center h-screen w-full"
 //       style={{
@@ -52,8 +52,8 @@
 
 // //
 import React from "react";
-import Hero from '../../assets/images/Hero.jpg';
-import { RiQuillPenFill } from 'react-icons/ri';  // Import the icon
+import Hero from "../../assets/images/Hero.jpg";
+import { RiQuillPenFill } from "react-icons/ri"; // Import the icon
 import { useNavigate } from "react-router-dom";
 
 function Home() {
@@ -69,11 +69,11 @@ function Home() {
   };
 
   const handleStartWritingClick = () => {
-    navigate("/writing");  // Assuming you want to navigate to the writing page
+    navigate("/writing"); // Assuming you want to navigate to the writing page
   };
 
   const handleExploreStoriesClick = () => {
-    navigate("/BlogListPage");  // Navigate to blog listing page
+    navigate("/BlogListPage"); // Navigate to blog listing page
   };
 
   return (
