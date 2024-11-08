@@ -50,3 +50,12 @@ export async function fetchAllposts(req, res) {
     res.status(500).json({ message: "something went wrong..." });
   }
 }
+export async function fetchUserPosts(req, res) {
+  const UserId = req.userId.id;
+  const posts = await prisma.post.findMany({
+    where: {
+      owner: UserId,
+    },
+  });
+  res.status(200).json(posts);
+}

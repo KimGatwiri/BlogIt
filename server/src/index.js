@@ -8,6 +8,7 @@ import { createPost, fetchSinglePost } from "./controllers/posts.js";
 import verifyToken from "./middleware/verifyToken.js";
 import validatePost from "./middleware/validatepost.js";
 import { fetchAllposts } from "./controllers/posts.js";
+import { fetchUserPosts } from "./controllers/posts.js";
 const app = express();
 //register middlewares
 app.use(express.json());
@@ -26,6 +27,7 @@ app.post("/auth/login", loginuser);
 app.post("/writing", verifyToken, validatePost, createPost);
 app.get("/postDetails/:id", fetchSinglePost);
 app.get("/posts", fetchAllposts);
+app.get("/posts/user", verifyToken, fetchUserPosts);
 //server
 app.listen(2000, () => {
   console.log(`server is running on port 2000...`);

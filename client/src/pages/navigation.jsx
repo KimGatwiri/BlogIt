@@ -25,9 +25,10 @@ function Navigation() {
   const handleListingClick = () => {
     navigate("/BlogListPage");
   };
-  const handleArticleClick = () => {
-    navigate("/Article");
+  const handlepersonalClick = () => {
+    navigate("/personalPosts");
   };
+
   return (
     <>
       <div className="flex gap-96 ">
@@ -55,17 +56,11 @@ function Navigation() {
             >
               Write
             </a>
+
             <a
-              href="/Article"
+              href="/personalPosts"
               className="explore underline decoration-transparent hover:decoration-blue-500 hover:decoration-4"
-              onClick={handleArticleClick}
-            >
-              Articles
-            </a>
-            <a
-              href=""
-              className="explore underline decoration-transparent hover:decoration-blue-500 hover:decoration-4"
-              onClick={handleListingClick}
+              onClick={handlepersonalClick}
             >
               My Blogs
             </a>
