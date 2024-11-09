@@ -9,6 +9,7 @@ import BlogListPage from "./pages/listing";
 import Writing from "./pages/writing";
 import Personalposts from "./pages/personalPosts";
 import PostDetails from "./pages/postdetails";
+import Editing from "./pages/editing";
 
 const client = new QueryClient();
 
@@ -38,7 +39,7 @@ function AppContent() {
         <Route path="/BlogListPage" element={<BlogListPage />} />
         <Route path="/writing" element={<Writing />} />
         <Route path="/Personalposts" element={<Personalposts />} />
-        {/* <Route path="/edit/:postId" element={<Edit />} /> */}
+        <Route path="/edit/:id" element={<Editing />} />
         <Route path="/postDetails/:id" element={<PostDetails />} />
         {/* Default Route */}
         <Route path="/" element={<Home />} />{" "}

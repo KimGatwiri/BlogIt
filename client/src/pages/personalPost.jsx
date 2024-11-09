@@ -1,13 +1,45 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { API_BASE } from "../utils/apibase";
+import { useMutation, useQueryClient } from "react-query";
+// import { toast } from "react-toastify";
 
 function PersonalPost({ id, title, excerpt, body }) {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  // Mutation for deleting a post
+  const { mutate: deletePost, isLoading: isDeleting } = useMutation(
+    async () => {
+      const response = await fetch(`${API_BASE}/posts/${id}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message);
+      }
+      return response.json();
+    },
+    {
+      onSuccess: () => {
+        
+        queryClient.invalidateQueries("personalPosts");
+      },
+      onError: (error) => {
+        toast.error(`Error deleting post: ${error.message}`);
+      },
+    }
+  );
 
   function handleEditingNavigation() {
     if (!id) return;
     navigate(`/edit/${id}`);
+  }
+
+  function handleDelete() {
+    deletePost();
   }
 
   return (
@@ -18,7 +50,6 @@ function PersonalPost({ id, title, excerpt, body }) {
         className="prose lg:prose-xl text-gray-800 mb-8"
         dangerouslySetInnerHTML={{ __html: body }}
       />
-      {/* <p className="text-base text-gray-500 mb-4">{body}</p> */}
       <div className="flex space-x-4">
         <button
           onClick={handleEditingNavigation}
@@ -28,11 +59,11 @@ function PersonalPost({ id, title, excerpt, body }) {
           <span>Update</span>
         </button>
         <button
-          onClick={() => console.log("Delete Post")}
+          onClick={handleDelete}
           className="flex items-center px-4 py-2 text-white bg-red-500 rounded-md hover:bg-red-600 transition-colors"
         >
           <FaTrashAlt className="mr-2" />
-          <span>Delete</span>
+          <span>{isDeleting ? "Deleting..." : "Delete"}</span>
         </button>
       </div>
     </div>

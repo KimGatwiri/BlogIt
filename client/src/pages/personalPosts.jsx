@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import PersonalPost from "./personalPost";
 import { API_BASE } from "../utils/apibase";
 
+
 function PersonalPosts() {
   const {
     data: posts = [],
@@ -53,6 +54,7 @@ function PersonalPosts() {
         {posts.map((post, i) => (
           <PersonalPost
             key={post.id || i}
+            id={post.id}
             title={post.title}
             excerpt={post.excerpt}
             body={post.body}
