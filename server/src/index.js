@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
     origin: ["http://localhost:5173"],
-    methods: ["GET", "POST", "PATCH", "DELETE","PUT"],
+    methods: ["GET", "POST", "PATCH", "DELETE", "PUT"],
     credentials: true,
   }),
 );
@@ -31,8 +31,8 @@ app.post("/writing", verifyToken, validatePost, createPost);
 app.get("/postDetails/:id", fetchSinglePost);
 app.get("/posts", fetchAllposts);
 app.get("/posts/user", verifyToken, fetchUserPosts);
-app.delete("/posts/:id",verifyToken,deletePost);
-app.put("/postDetails/:id",verifyToken,validatePost,update)
+app.delete("/posts/:id", verifyToken, deletePost);
+app.put("/postDetails/:id", verifyToken, validatePost, update);
 //server
 app.listen(2000, () => {
   console.log(`server is running on port 2000...`);

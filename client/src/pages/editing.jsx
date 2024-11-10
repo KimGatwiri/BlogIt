@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Editor } from "primereact/editor";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
@@ -30,22 +30,21 @@ function Editing() {
     }
     return response.json();
   });
-    console .log(post);
+  console.log(post);
 
-    useEffect(()=>{
-      if(post){
-
-        setTitle(post.title || "");
-        setExcerpt(post.excerpt ||"")
-        setBody(post.body ||"")
-      }
-    },[post])
+  useEffect(() => {
+    if (post) {
+      setTitle(post.title || "");
+      setExcerpt(post.excerpt || "");
+      setBody(post.body || "");
+    }
+  }, [post]);
 
   const { mutate, isLoading: isUpdating } = useMutation(
     async (formData) => {
       const response = await fetch(`${API_BASE}/postDetails/${id}`, {
         method: "PUT",
-        
+
         headers: {
           "Content-Type": "application/json",
         },
@@ -57,18 +56,16 @@ function Editing() {
         const error = await response.json();
         throw new Error(error.message);
       }
-      const data =await response.json();
+      const data = await response.json();
       console.log(data);
       return data;
     },
-   {
+    {
       onSuccess: (data) => {
         navigate(`/postDetails/${data.id}`);
-
-      
-    }
-  }
-);
+      },
+    },
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();

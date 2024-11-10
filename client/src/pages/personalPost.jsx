@@ -24,13 +24,12 @@ function PersonalPost({ id, title, excerpt, body }) {
     },
     {
       onSuccess: () => {
-        
         queryClient.invalidateQueries("personalPosts");
       },
       onError: (error) => {
         toast.error(`Error deleting post: ${error.message}`);
       },
-    }
+    },
   );
 
   function handleEditingNavigation() {

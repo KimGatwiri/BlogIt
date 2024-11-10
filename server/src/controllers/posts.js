@@ -64,7 +64,6 @@ export async function deletePost(req, res) {
     const { id } = req.params; // Make sure this is `id` to match the route parameter
     const userId = req.userId.id; // userId set by verifyToken middleware
 
-
     const post = await prisma.post.findFirst({
       where: {
         id: id, // Use `id` here to refer to the post ID
@@ -73,7 +72,11 @@ export async function deletePost(req, res) {
     });
 
     if (!post) {
-      return res.status(404).json({ message: "Post not found or you're not authorized to delete it." });
+      return res
+        .status(404)
+        .json({
+          message: "Post not found or you're not authorized to delete it.",
+        });
     }
 
     await prisma.post.delete({
@@ -96,7 +99,7 @@ export async function deletePost(req, res) {
 //   const post=await prisma.post.update({
 //     where:{
 //       id:id,owner:UserId,
-     
+
 //     },
 //     data:{title,excerpt,body}
 //   })
@@ -115,7 +118,7 @@ export async function update(req, res) {
     const post = await prisma.post.update({
       where: {
         id: id,
-        owner: UserId,  // Make sure 'owner' field exists in schema or modify accordingly
+        owner: UserId, // Make sure 'owner' field exists in schema or modify accordingly
       },
       data: { title, excerpt, body },
     });
